@@ -8,6 +8,13 @@
 
 #import "AppDelegate.h"
 
+#import "HomeVC.h"
+#import "LeftMenuTVC.h"
+
+
+#import "SlideNavigationController.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -15,8 +22,30 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+
+    HomeVC *homePage = [[HomeVC alloc]init];
+    
+    
+    SlideNavigationController *slideNavController =
+    [[SlideNavigationController alloc]initWithRootViewController:homePage];
+  
+    LeftMenuTVC *leftMenu = [[LeftMenuTVC alloc] init];
+    
+    //[SlideNavigationController sharedInstance].rightMenu = rightMenu;
+    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
+    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = 0.2;
+    
+    
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = slideNavController;
+    [self.window makeKeyAndVisible];
+    
+    
+    
+    
     return YES;
 }
 
